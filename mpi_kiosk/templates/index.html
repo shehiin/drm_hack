@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI Robotic Inspection System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <span class="logo">&gt;_</span>
+                <h1>MPI ROBOTIC INSPECTION SYSTEM</h1>
+                <span class="version">v1.0</span>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator" id="systemStatus">
+                    <span class="status-dot"></span>
+                    <span class="status-text">INITIALIZING</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Left Panel - Controls & Camera -->
+            <div class="panel-left">
+                <!-- Component Selection -->
+                <section class="section section-input">
+                    <div class="section-header">
+                        <span class="section-icon">&gt;</span>
+                        <span class="section-title">COMPONENT INPUT</span>
+                        <span class="input-hint">knuckle | cube | gear</span>
+                    </div>
+                    <div class="input-controls">
+                        <input type="text" id="componentInput" class="component-text-input" placeholder="Type or speak component name..." autocomplete="off">
+                        <button class="btn btn-voice" id="btnVoice" title="Hold to speak">
+                            <span class="voice-icon">MIC</span>
+                        </button>
+                        <span class="selected-component" id="selectedComponent">--</span>
+                    </div>
+                </section>
+
+                <!-- Camera Feed -->
+                <section class="section section-camera">
+                    <div class="section-header">
+                        <span class="section-icon">&gt;</span>
+                        <span class="section-title">CAMERA FEED</span>
+                        <div class="camera-controls">
+                            <label class="camera-label">DEV:</label>
+                            <input type="number" id="cameraInput" value="3" min="0" max="10" class="camera-input">
+                            <button class="btn btn-mini" id="btnCameraConnect">CONNECT</button>
+                            <span class="camera-status" id="cameraStatus">--</span>
+                        </div>
+                    </div>
+                    <div class="camera-container">
+                        <div class="camera-frame" id="cameraFrame">
+                            <img id="videoFeed" src="/video_feed" alt="Camera Feed">
+                            <img id="inspectionImage" class="hidden" alt="Inspection Result">
+                            <div class="camera-overlay hidden" id="cameraOverlay">
+                                <span class="overlay-text">ANALYZING...</span>
+                            </div>
+                        </div>
+                        <div class="camera-info">
+                            <span id="feedStatus">LIVE</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Action Buttons -->
+                <section class="section section-actions">
+                    <button class="btn btn-primary btn-large" id="btnInspect">
+                        <span class="btn-icon">[&gt;]</span>
+                        <span class="btn-label">START INSPECTION</span>
+                    </button>
+                    <button class="btn btn-secondary" id="btnNewInspection">
+                        <span class="btn-label">NEW INSPECTION</span>
+                    </button>
+                </section>
+            </div>
+
+            <!-- Right Panel - Results & Logs -->
+            <div class="panel-right">
+                <!-- Robot Status -->
+                <section class="section section-robot">
+                    <div class="section-header">
+                        <span class="section-icon">&gt;</span>
+                        <span class="section-title">ROBOT STATUS</span>
+                    </div>
+                    <div class="robot-status-box">
+                        <div class="robot-state">
+                            <span class="robot-state-label">STATE:</span>
+                            <span class="robot-state-value" id="robotState">IDLE</span>
+                        </div>
+                        <div class="robot-object">
+                            <span class="robot-object-label">OBJECT:</span>
+                            <span class="robot-object-value" id="robotObject">--</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Inspection Results -->
+                <section class="section section-results">
+                    <div class="section-header">
+                        <span class="section-icon">&gt;</span>
+                        <span class="section-title">INSPECTION RESULTS</span>
+                    </div>
+                    <div class="results-box" id="resultsBox">
+                        <div class="results-placeholder">
+                            <span>No inspection performed</span>
+                            <span class="results-hint">Select a component and click INSPECT</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- System Log -->
+                <section class="section section-log">
+                    <div class="section-header">
+                        <span class="section-icon">&gt;</span>
+                        <span class="section-title">SYSTEM LOG</span>
+                        <button class="btn btn-mini" id="btnClearLog">CLEAR</button>
+                    </div>
+                    <div class="log-box" id="logBox">
+                        <div class="log-entry log-info">
+                            <span class="log-time">[--:--:--]</span>
+                            <span class="log-message">Waiting for system...</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <span class="footer-left">MPI Kiosk // Hackathon 2026</span>
+            <span class="footer-right">
+                <span id="footerCamera">CAM: --</span>
+                <span class="footer-sep">|</span>
+                <span id="footerApi">API: --</span>
+            </span>
+        </footer>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
